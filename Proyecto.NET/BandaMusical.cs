@@ -12,6 +12,9 @@ namespace Proyecto.NET
         public string Titulo { get; set;}
 
         public int CantCanciones { get; set; }
-         
+
+        public string UrlImagenTapa { get; set; }
+
+
     }
 }

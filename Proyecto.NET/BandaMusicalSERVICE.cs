@@ -23,7 +23,7 @@ namespace Proyecto.NET
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=DISCOS_DB; integrated security=true";
                 comando.CommandType=System.Data.CommandType.Text;
-                comando.CommandText = "select Titulo, FechaLanzamiento, CantidadCanciones from DISCOS";
+                comando.CommandText = "select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa from DISCOS";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -36,6 +36,7 @@ namespace Proyecto.NET
                     aux.Titulo = (string)lector["Titulo"];
                     aux.Fecha = (DateTime)lector["FechaLanzamiento"];
                     aux.CantCanciones = (int)lector["CantidadCanciones"];
+                    aux.UrlImagenTapa = (string)lector["UrlImagenTapa"];
 
                     lista.Add(aux);  
 

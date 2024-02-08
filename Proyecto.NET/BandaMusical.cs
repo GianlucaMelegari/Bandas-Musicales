@@ -15,6 +15,8 @@ namespace Proyecto.NET
 
         public string UrlImagenTapa { get; set; }
 
+        public Estilo Genero { get; set; }
 
+        public TiposEdicion Formato {  get; set; }
     }
 }

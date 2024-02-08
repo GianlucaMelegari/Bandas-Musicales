@@ -23,7 +23,7 @@ namespace Proyecto.NET
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=DISCOS_DB; integrated security=true";
                 comando.CommandType=System.Data.CommandType.Text;
-                comando.CommandText = "select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa from DISCOS";
+                comando.CommandText = "select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion Genero, T.Descripcion Formato from DISCOS D, ESTILOS E, TIPOSEDICION T where D.IdEstilo=E.Id AND D.IdTipoEdicion=T.Id";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -37,7 +37,12 @@ namespace Proyecto.NET
                     aux.Fecha = (DateTime)lector["FechaLanzamiento"];
                     aux.CantCanciones = (int)lector["CantidadCanciones"];
                     aux.UrlImagenTapa = (string)lector["UrlImagenTapa"];
-
+                    //si no le creamos el objeto Genero / Formato nos da referencia nula ya que no existiria ningun objeto cargado
+                    aux.Genero = new Estilo();
+                    aux.Genero.Descripcion = (string)lector["Genero"];
+                    aux.Formato = new TiposEdicion();
+                    aux.Formato.Descripcion = (string)lector["Formato"];
+                    
                     lista.Add(aux);  
 
                 }

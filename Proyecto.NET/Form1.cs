@@ -23,6 +23,7 @@ namespace Proyecto.NET
             BandaMusicalSERVICE service = new BandaMusicalSERVICE();
             listaMusical = service.listar();
             dgvBandas.DataSource = listaMusical;
+            dgvBandas.Columns["UrlImagenTapa"].Visible = false;
             cargarImagen(listaMusical[0].UrlImagenTapa);
         }
 
@@ -30,6 +31,8 @@ namespace Proyecto.NET
         {
             BandaMusical seleccionado = (BandaMusical)dgvBandas.CurrentRow.DataBoundItem;
             cargarImagen(seleccionado.UrlImagenTapa);
+
+            
         }
 
         private void cargarImagen(string imagen)

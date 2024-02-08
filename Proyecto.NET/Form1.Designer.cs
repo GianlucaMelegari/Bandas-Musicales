@@ -39,15 +39,15 @@
             this.dgvBandas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBandas.Location = new System.Drawing.Point(12, 12);
             this.dgvBandas.Name = "dgvBandas";
-            this.dgvBandas.Size = new System.Drawing.Size(464, 249);
+            this.dgvBandas.Size = new System.Drawing.Size(578, 249);
             this.dgvBandas.TabIndex = 0;
             this.dgvBandas.SelectionChanged += new System.EventHandler(this.dgvBandas_SelectionChanged);
             // 
             // pbAlbum
             // 
-            this.pbAlbum.Location = new System.Drawing.Point(503, 14);
+            this.pbAlbum.Location = new System.Drawing.Point(616, 12);
             this.pbAlbum.Name = "pbAlbum";
-            this.pbAlbum.Size = new System.Drawing.Size(263, 246);
+            this.pbAlbum.Size = new System.Drawing.Size(263, 249);
             this.pbAlbum.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbAlbum.TabIndex = 1;
             this.pbAlbum.TabStop = false;
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(788, 286);
+            this.ClientSize = new System.Drawing.Size(895, 286);
             this.Controls.Add(this.pbAlbum);
             this.Controls.Add(this.dgvBandas);
             this.Name = "Form1";

@@ -8,7 +8,8 @@ namespace Dominio
 {
     public class BandaMusical
     {
-        public DateTime Fecha { get; set; }
+        //public int Id { get; set; }
+        public DateTime Fecha { get; set; } 
         public string Titulo { get; set;}
 
         public int CantCanciones { get; set; }

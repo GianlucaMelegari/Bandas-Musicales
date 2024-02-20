@@ -30,6 +30,7 @@
         {
             this.dgvBandas = new System.Windows.Forms.DataGridView();
             this.pbAlbum = new System.Windows.Forms.PictureBox();
+            this.btnAgregar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBandas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAlbum)).BeginInit();
             this.SuspendLayout();
@@ -52,11 +53,22 @@
             this.pbAlbum.TabIndex = 1;
             this.pbAlbum.TabStop = false;
             // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Location = new System.Drawing.Point(12, 277);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.TabIndex = 2;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(895, 286);
+            this.ClientSize = new System.Drawing.Size(895, 330);
+            this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.pbAlbum);
             this.Controls.Add(this.dgvBandas);
             this.Name = "Form1";
@@ -72,6 +84,7 @@
 
         private System.Windows.Forms.DataGridView dgvBandas;
         private System.Windows.Forms.PictureBox pbAlbum;
+        private System.Windows.Forms.Button btnAgregar;
     }
 }
 

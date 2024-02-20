@@ -58,5 +58,38 @@ namespace Service
 
 
         }
+
+        public void agregar(BandaMusical nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones) values ('" + nuevo.Titulo + "' , '" + nuevo.Fecha + "' , '" + nuevo.CantCanciones + "')");
+                datos.ejecutarAccion();
+                //datos.setearConsulta("INSERT INTO DISCOS (Titulo, FechaLanzamiento, CantidadCanciones) VALUES (@Titulo, @Fecha, @CantCanciones)");
+                //datos.Comando.Parameters.AddWithValue("@Titulo", nuevo.Titulo);
+                //datos.comando.Parameters.AddWithValue("@Fecha", nuevo.Fecha);
+                //datos.comando.Parameters.AddWithValue("@CantCanciones", nuevo.CantCanciones);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void modificar(BandaMusical modificar)
+        {
+
+        }
+
     }
+
 }

@@ -36,12 +36,16 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtFechaLanz = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cbEstilo = new System.Windows.Forms.ComboBox();
+            this.cbTipoEdicion = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 62);
+            this.label1.Location = new System.Drawing.Point(11, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 13);
             this.label1.TabIndex = 0;
@@ -50,7 +54,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(92, 29);
+            this.label2.Location = new System.Drawing.Point(78, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 1;
@@ -59,7 +63,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(43, 94);
+            this.label3.Location = new System.Drawing.Point(29, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 13);
             this.label3.TabIndex = 2;
@@ -67,21 +71,21 @@
             // 
             // txtTitulo
             // 
-            this.txtTitulo.Location = new System.Drawing.Point(131, 26);
+            this.txtTitulo.Location = new System.Drawing.Point(117, 22);
             this.txtTitulo.Name = "txtTitulo";
-            this.txtTitulo.Size = new System.Drawing.Size(216, 20);
+            this.txtTitulo.Size = new System.Drawing.Size(134, 20);
             this.txtTitulo.TabIndex = 4;
             // 
             // txtCantCanciones
             // 
-            this.txtCantCanciones.Location = new System.Drawing.Point(131, 91);
+            this.txtCantCanciones.Location = new System.Drawing.Point(117, 74);
             this.txtCantCanciones.Name = "txtCantCanciones";
-            this.txtCantCanciones.Size = new System.Drawing.Size(216, 20);
+            this.txtCantCanciones.Size = new System.Drawing.Size(134, 20);
             this.txtCantCanciones.TabIndex = 5;
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(114, 139);
+            this.btnAceptar.Location = new System.Drawing.Point(68, 172);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 6;
@@ -91,7 +95,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(222, 139);
+            this.btnCancelar.Location = new System.Drawing.Point(176, 172);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 7;
@@ -102,17 +106,56 @@
             // txtFechaLanz
             // 
             this.txtFechaLanz.AccessibleName = "";
-            this.txtFechaLanz.Location = new System.Drawing.Point(131, 59);
+            this.txtFechaLanz.Location = new System.Drawing.Point(117, 48);
             this.txtFechaLanz.Name = "txtFechaLanz";
-            this.txtFechaLanz.Size = new System.Drawing.Size(216, 20);
+            this.txtFechaLanz.Size = new System.Drawing.Size(134, 20);
             this.txtFechaLanz.TabIndex = 9;
             this.txtFechaLanz.Text = "dd/mm/aaaa";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(79, 103);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Estilo";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(45, 130);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Tipo Edicion";
+            // 
+            // cbEstilo
+            // 
+            this.cbEstilo.FormattingEnabled = true;
+            this.cbEstilo.Location = new System.Drawing.Point(117, 100);
+            this.cbEstilo.Name = "cbEstilo";
+            this.cbEstilo.Size = new System.Drawing.Size(134, 21);
+            this.cbEstilo.TabIndex = 12;
+            this.cbEstilo.SelectedIndexChanged += new System.EventHandler(this.cbEstilo_SelectedIndexChanged);
+            // 
+            // cbTipoEdicion
+            // 
+            this.cbTipoEdicion.FormattingEnabled = true;
+            this.cbTipoEdicion.Location = new System.Drawing.Point(117, 127);
+            this.cbTipoEdicion.Name = "cbTipoEdicion";
+            this.cbTipoEdicion.Size = new System.Drawing.Size(134, 21);
+            this.cbTipoEdicion.TabIndex = 13;
             // 
             // frmAltaBandaMusical
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 196);
+            this.ClientSize = new System.Drawing.Size(302, 231);
+            this.Controls.Add(this.cbTipoEdicion);
+            this.Controls.Add(this.cbEstilo);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtFechaLanz);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
@@ -123,6 +166,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmAltaBandaMusical";
             this.Text = "Nueva Banda Musical";
+            this.Load += new System.EventHandler(this.frmAltaBandaMusical_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +182,9 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtFechaLanz;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cbEstilo;
+        private System.Windows.Forms.ComboBox cbTipoEdicion;
     }
 }

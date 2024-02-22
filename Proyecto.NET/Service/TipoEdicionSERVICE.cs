@@ -7,29 +7,27 @@ using Dominio;
 
 namespace Service
 {
-    public class EstiloSERVICE
+    public class TipoEdicionSERVICE
     {
-        public List<Estilo> listar()
+        public List<TiposEdicion> listar()
         {
-            List<Estilo> lista = new List<Estilo>();
-            AccesoDatos datos= new AccesoDatos();
+            List<TiposEdicion> lista = new List<TiposEdicion>();
+            AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("Select Id, Descripcion from ESTILOS");
+                datos.setearConsulta("Select Id, Descripcion from TIPOSEDICION");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
-                    Estilo aux = new Estilo();
+                    TiposEdicion aux = new TiposEdicion();
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
 
                     lista.Add(aux);
                 }
-
                 return lista;
-
             }
             catch (Exception ex)
             {
@@ -40,7 +38,8 @@ namespace Service
             {
                 datos.cerrarConexion();
             }
-            
+        
         }
+        
     }
 }

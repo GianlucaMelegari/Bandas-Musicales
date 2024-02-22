@@ -41,17 +41,14 @@ namespace Proyecto.NET
                 // Intentar convertir el texto a DateTime
                 if (DateTime.TryParseExact(fechaTexto, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fecha))
                 {
-                    // La conversión fue exitosa
                     banda.Fecha = fecha;
                 }
                 else
                 {
                     // La conversión falló, la entrada no es una fecha válida
                     MessageBox.Show("Formato de Fecha Inválido. Por favor, ingrese una fecha en el formato dd/MM/yyyy.");
-                    return; // Salir del método si la fecha no es válida
+                    return; 
                 }
-
-
 
                 banda.Titulo = txtTitulo.Text;
                 
@@ -67,6 +64,28 @@ namespace Proyecto.NET
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void frmAltaBandaMusical_Load(object sender, EventArgs e)
+        {
+            EstiloSERVICE estiloService = new EstiloSERVICE();
+            TipoEdicionSERVICE tipoEdicionService = new TipoEdicionSERVICE();
+            try
+            {
+                cbEstilo.DataSource = estiloService.listar();
+                cbTipoEdicion.DataSource = tipoEdicionService.listar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+        private void cbEstilo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

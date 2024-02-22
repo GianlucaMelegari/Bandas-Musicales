@@ -15,6 +15,7 @@ namespace Service
         public List<BandaMusical> listar()
         {
             List<BandaMusical>lista=new List<BandaMusical>();
+            AccesoDatos datos = new AccesoDatos();
 
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();

@@ -22,11 +22,7 @@ namespace Proyecto.NET
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            BandaMusicalSERVICE service = new BandaMusicalSERVICE();
-            listaMusical = service.listar();
-            dgvBandas.DataSource = listaMusical;
-            dgvBandas.Columns["UrlImagenTapa"].Visible = false;
-            cargarImagen(listaMusical[0].UrlImagenTapa);
+            cargar();
         }
 
         private void dgvBandas_SelectionChanged(object sender, EventArgs e)
@@ -35,6 +31,25 @@ namespace Proyecto.NET
             cargarImagen(seleccionado.UrlImagenTapa);
 
             
+        }
+
+        private void cargar()
+        {
+            BandaMusicalSERVICE service = new BandaMusicalSERVICE();
+            try
+            {
+                listaMusical = service.listar();
+                dgvBandas.DataSource = listaMusical;
+                dgvBandas.Columns["UrlImagenTapa"].Visible = false;
+                cargarImagen(listaMusical[0].UrlImagenTapa);
+                 
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+
         }
 
         private void cargarImagen(string imagen)
@@ -53,7 +68,7 @@ namespace Proyecto.NET
         {
             frmAltaBandaMusical alta = new frmAltaBandaMusical();
             alta.ShowDialog();
-
+            cargar();
 
         }
     }

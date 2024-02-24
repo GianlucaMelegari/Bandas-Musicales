@@ -66,14 +66,17 @@ namespace Service
 
             try
             {
-                datos.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones) values ('" + nuevo.Titulo + "' , '" + nuevo.Fecha + "' , '" + nuevo.CantCanciones + "')");
-                datos.ejecutarAccion();
-                //datos.setearConsulta("INSERT INTO DISCOS (Titulo, FechaLanzamiento, CantidadCanciones) VALUES (@Titulo, @Fecha, @CantCanciones)");
-                //datos.Comando.Parameters.AddWithValue("@Titulo", nuevo.Titulo);
-                //datos.comando.Parameters.AddWithValue("@Fecha", nuevo.Fecha);
-                //datos.comando.Parameters.AddWithValue("@CantCanciones", nuevo.CantCanciones);
+                datos.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, IdEstilo, IdTipoEdicion) values ('" + nuevo.Titulo + "' , '" + nuevo.Fecha + "' , '" + nuevo.CantCanciones + "' , @idEstilo, @idTipoEdicion)");
+                datos.setearParametro("IdEstilo", nuevo.Genero?.Id ?? 0);
+                datos.setearParametro("IdTipoEdicion", nuevo.Formato?.Id ?? 0);
+                
+                //ERROR EN EL SETEAR PARAMETROS, NO ENCUENTRA OBJETO
+                
+                //datos.setearParametro("@idEstilo", nuevo.Genero.Id);
+                //datos.setearParametro("@idTipoEdicion", nuevo.Formato.Id);
 
                 datos.ejecutarAccion();
+                
             }
             catch (Exception ex)
             {

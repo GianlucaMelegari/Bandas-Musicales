@@ -38,8 +38,11 @@
             // dgvBandas
             // 
             this.dgvBandas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBandas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvBandas.Location = new System.Drawing.Point(12, 12);
+            this.dgvBandas.MultiSelect = false;
             this.dgvBandas.Name = "dgvBandas";
+            this.dgvBandas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBandas.Size = new System.Drawing.Size(578, 249);
             this.dgvBandas.TabIndex = 0;
             this.dgvBandas.SelectionChanged += new System.EventHandler(this.dgvBandas_SelectionChanged);

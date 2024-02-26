@@ -9,7 +9,14 @@ namespace Dominio
 {
     public class BandaMusical
     {
-        
+        public BandaMusical()
+        {
+            Genero = new Estilo();
+            Formato = new TiposEdicion();
+        }
+
+        public int Id { get; set; }
+
         public DateTime Fecha { get; set; }
 
         [DisplayName("Título")]
@@ -23,6 +30,10 @@ namespace Dominio
         [DisplayName("Género")]
         public Estilo Genero { get; set; } 
 
-        public TiposEdicion Formato {  get; set; } 
+        public TiposEdicion Formato {  get; set; }
+        
+
+
+
     }
 }

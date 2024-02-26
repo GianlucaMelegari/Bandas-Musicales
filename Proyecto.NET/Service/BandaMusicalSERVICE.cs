@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dominio;
+using Microsoft.SqlServer.Server;
 
 namespace Service
 {
@@ -25,7 +26,7 @@ namespace Service
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=DISCOS_DB; integrated security=true";
                 comando.CommandType=System.Data.CommandType.Text;
-                comando.CommandText = "select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion Genero, T.Descripcion Formato from DISCOS D, ESTILOS E, TIPOSEDICION T where D.IdEstilo=E.Id AND D.IdTipoEdicion=T.Id";
+                comando.CommandText = "select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion Genero, T.Descripcion Formato, D.IdEstilo,D.IdTipoEdicion, D.Id from DISCOS D, ESTILOS E, TIPOSEDICION T where D.IdEstilo=E.Id AND D.IdTipoEdicion=T.Id";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -35,14 +36,20 @@ namespace Service
                 {
                     BandaMusical aux = new BandaMusical();
 
+                    aux.Id = (int)lector["Id"];
                     aux.Titulo = (string)lector["Titulo"];
                     aux.Fecha = (DateTime)lector["FechaLanzamiento"];
                     aux.CantCanciones = (int)lector["CantidadCanciones"];
-                    aux.UrlImagenTapa = (string)lector["UrlImagenTapa"];
+ 
+                    if (!(lector["UrlImagenTapa"] is DBNull))
+                        aux.UrlImagenTapa = (string)lector["UrlImagenTapa"];
+
                     //si no le creamos el objeto Genero / Formato nos da referencia nula ya que no existiria ningun objeto cargado
                     aux.Genero = new Estilo();
+                    aux.Genero.Id = (int)lector["IdEstilo"];
                     aux.Genero.Descripcion = (string)lector["Genero"];
                     aux.Formato = new TiposEdicion();
+                    aux.Formato.Id = (int)lector["IdTipoEdicion"];
                     aux.Formato.Descripcion = (string)lector["Formato"];
                     
                     lista.Add(aux);  
@@ -66,14 +73,13 @@ namespace Service
 
             try
             {
-                datos.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, IdEstilo, IdTipoEdicion) values ('" + nuevo.Titulo + "' , '" + nuevo.Fecha + "' , '" + nuevo.CantCanciones + "' , @idEstilo, @idTipoEdicion)");
-                datos.setearParametro("IdEstilo", nuevo.Genero?.Id ?? 0);
-                datos.setearParametro("IdTipoEdicion", nuevo.Formato?.Id ?? 0);
-                
-                //ERROR EN EL SETEAR PARAMETROS, NO ENCUENTRA OBJETO
-                
-                //datos.setearParametro("@idEstilo", nuevo.Genero.Id);
-                //datos.setearParametro("@idTipoEdicion", nuevo.Formato.Id);
+
+                datos.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, IdEstilo, IdTipoEdicion) values (@Titulo, @Fecha, @CantCanciones, @IdEstilo, @IdTipoEdicion)");
+                datos.setearParametro("@Titulo", nuevo.Titulo);
+                datos.setearParametro("@Fecha", nuevo.Fecha);
+                datos.setearParametro("@CantCanciones", nuevo.CantCanciones);
+                datos.setearParametro("@IdEstilo", nuevo.Genero.Id);
+                datos.setearParametro("@IdTipoEdicion", nuevo.Formato.Id);
 
                 datos.ejecutarAccion();
                 
@@ -89,9 +95,32 @@ namespace Service
             }
         }
 
-        public void modificar(BandaMusical modificar)
+        public void modificar(BandaMusical banda)
         {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update DISCOS set Titulo= @titulo, FechaLanzamiento= @fecha, CantidadCanciones= @cantcanc, UrlImagenTapa= @urlImagen, IdEstilo= @idEstilo, IdTipoEdicion= @idTipoEdicion where Id= @id");
 
+                datos.setearParametro("@titulo", banda.Titulo);
+                datos.setearParametro("@fecha", banda.Fecha);
+                datos.setearParametro("@cantcanc", banda.CantCanciones);
+                datos.setearParametro ("@urlImagen", banda.UrlImagenTapa);
+                datos.setearParametro("@idEstilo", banda.Genero.Id);
+                datos.setearParametro("@idTipoEdicion", banda.Formato.Id);
+                datos.setearParametro("@id", banda.Id);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            } 
+            finally 
+            { 
+                datos.cerrarConexion();
+            }
         }
 
     }

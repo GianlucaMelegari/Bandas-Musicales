@@ -82,5 +82,27 @@ namespace Proyecto.NET
             modificar.ShowDialog();
             cargar();
         }
+
+        
+        private void btnEliminarFisica_Click(object sender, EventArgs e)
+        {
+            BandaMusicalSERVICE banda = new BandaMusicalSERVICE();
+            BandaMusical seleccionado;
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("Estas seguro que queres eliminarlo?","Eliminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning); //MENSAJE MODAL
+                if(respuesta == DialogResult.Yes)
+                {
+                    seleccionado = (BandaMusical)dgvBandas.CurrentRow.DataBoundItem;
+                    banda.eliminar(seleccionado.Id);
+                    cargar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

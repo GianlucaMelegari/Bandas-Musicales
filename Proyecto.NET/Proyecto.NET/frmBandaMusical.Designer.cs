@@ -32,6 +32,7 @@
             this.pbAlbum = new System.Windows.Forms.PictureBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.btnEliminarFisica = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBandas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAlbum)).BeginInit();
             this.SuspendLayout();
@@ -77,16 +78,27 @@
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // Form1
+            // btnEliminarFisica
+            // 
+            this.btnEliminarFisica.Location = new System.Drawing.Point(509, 277);
+            this.btnEliminarFisica.Name = "btnEliminarFisica";
+            this.btnEliminarFisica.Size = new System.Drawing.Size(81, 23);
+            this.btnEliminarFisica.TabIndex = 4;
+            this.btnEliminarFisica.Text = "Eliminar Fisica";
+            this.btnEliminarFisica.UseVisualStyleBackColor = true;
+            this.btnEliminarFisica.Click += new System.EventHandler(this.btnEliminarFisica_Click);
+            // 
+            // frmBandaMusical
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(895, 330);
+            this.Controls.Add(this.btnEliminarFisica);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.pbAlbum);
             this.Controls.Add(this.dgvBandas);
-            this.Name = "Form1";
+            this.Name = "frmBandaMusical";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBandas)).EndInit();
@@ -101,6 +113,7 @@
         private System.Windows.Forms.PictureBox pbAlbum;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnEliminarFisica;
     }
 }
 

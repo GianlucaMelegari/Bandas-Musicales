@@ -33,6 +33,8 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminarFisica = new System.Windows.Forms.Button();
+            this.Filtro = new System.Windows.Forms.Label();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBandas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAlbum)).BeginInit();
             this.SuspendLayout();
@@ -41,7 +43,7 @@
             // 
             this.dgvBandas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBandas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvBandas.Location = new System.Drawing.Point(12, 12);
+            this.dgvBandas.Location = new System.Drawing.Point(12, 60);
             this.dgvBandas.MultiSelect = false;
             this.dgvBandas.Name = "dgvBandas";
             this.dgvBandas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -51,7 +53,7 @@
             // 
             // pbAlbum
             // 
-            this.pbAlbum.Location = new System.Drawing.Point(616, 12);
+            this.pbAlbum.Location = new System.Drawing.Point(616, 60);
             this.pbAlbum.Name = "pbAlbum";
             this.pbAlbum.Size = new System.Drawing.Size(263, 249);
             this.pbAlbum.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -60,7 +62,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(12, 277);
+            this.btnAgregar.Location = new System.Drawing.Point(12, 325);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 2;
@@ -70,7 +72,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(93, 277);
+            this.btnModificar.Location = new System.Drawing.Point(93, 325);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(74, 23);
             this.btnModificar.TabIndex = 3;
@@ -80,19 +82,39 @@
             // 
             // btnEliminarFisica
             // 
-            this.btnEliminarFisica.Location = new System.Drawing.Point(509, 277);
+            this.btnEliminarFisica.Location = new System.Drawing.Point(516, 325);
             this.btnEliminarFisica.Name = "btnEliminarFisica";
-            this.btnEliminarFisica.Size = new System.Drawing.Size(81, 23);
+            this.btnEliminarFisica.Size = new System.Drawing.Size(74, 23);
             this.btnEliminarFisica.TabIndex = 4;
-            this.btnEliminarFisica.Text = "Eliminar Fisica";
+            this.btnEliminarFisica.Text = "Eliminar ";
             this.btnEliminarFisica.UseVisualStyleBackColor = true;
             this.btnEliminarFisica.Click += new System.EventHandler(this.btnEliminarFisica_Click);
+            // 
+            // Filtro
+            // 
+            this.Filtro.AutoSize = true;
+            this.Filtro.Location = new System.Drawing.Point(11, 37);
+            this.Filtro.Name = "Filtro";
+            this.Filtro.Size = new System.Drawing.Size(32, 13);
+            this.Filtro.TabIndex = 5;
+            this.Filtro.Text = "Filtrar";
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Location = new System.Drawing.Point(46, 34);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(225, 20);
+            this.txtFiltro.TabIndex = 6;
+            this.txtFiltro.TextChanged += new System.EventHandler(this.txtFiltro_TextChanged);
+            this.txtFiltro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltro_KeyPress);
             // 
             // frmBandaMusical
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(895, 330);
+            this.ClientSize = new System.Drawing.Size(895, 372);
+            this.Controls.Add(this.txtFiltro);
+            this.Controls.Add(this.Filtro);
             this.Controls.Add(this.btnEliminarFisica);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
@@ -104,6 +126,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBandas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAlbum)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -114,6 +137,8 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminarFisica;
+        private System.Windows.Forms.Label Filtro;
+        private System.Windows.Forms.TextBox txtFiltro;
     }
 }
 

@@ -27,10 +27,13 @@ namespace Proyecto.NET
 
         private void dgvBandas_SelectionChanged(object sender, EventArgs e)
         {
-            BandaMusical seleccionado = (BandaMusical)dgvBandas.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.UrlImagenTapa);
+            if (dgvBandas.CurrentRow != null)
+            {
+                BandaMusical seleccionado = (BandaMusical)dgvBandas.CurrentRow.DataBoundItem;
+                cargarImagen(seleccionado.UrlImagenTapa);
+            }
 
-            
+
         }
 
         private void cargar()
@@ -40,8 +43,7 @@ namespace Proyecto.NET
             {
                 listaMusical = service.listar();
                 dgvBandas.DataSource = listaMusical;
-                dgvBandas.Columns["UrlImagenTapa"].Visible = false;
-                dgvBandas.Columns["Id"].Visible = false;
+                ocultarColumnas();
                 cargarImagen(listaMusical[0].UrlImagenTapa);
                  
             }
@@ -51,6 +53,12 @@ namespace Proyecto.NET
                 MessageBox.Show(ex.ToString());
             }
 
+        }
+
+        private void ocultarColumnas()
+        {
+            dgvBandas.Columns["UrlImagenTapa"].Visible = false;
+            dgvBandas.Columns["Id"].Visible = false;
         }
 
         private void cargarImagen(string imagen)
@@ -103,6 +111,36 @@ namespace Proyecto.NET
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<BandaMusical> listaFiltrada;
+            string filtro = txtFiltro.Text;
+
+            if (filtro.Length>= 3)
+            {
+                listaFiltrada = listaMusical.FindAll(x => x.Titulo.ToUpper().Contains(filtro.ToUpper()) || x.Genero.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+
+            }
+            else
+            {
+                listaFiltrada = listaMusical;
+            }
+
+            dgvBandas.DataSource = null;
+            dgvBandas.DataSource = listaFiltrada;
+            ocultarColumnas();
+
         }
     }
 }

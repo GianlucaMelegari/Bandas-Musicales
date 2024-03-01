@@ -23,6 +23,12 @@ namespace Proyecto.NET
         private void Form1_Load(object sender, EventArgs e)
         {
             cargar();
+            cbCampo.Items.Add("Canciones");
+            cbCampo.Items.Add("Genero");
+            cbCampo.Items.Add("Formato");
+
+
+
         }
 
         private void dgvBandas_SelectionChanged(object sender, EventArgs e)
@@ -141,6 +147,44 @@ namespace Proyecto.NET
             dgvBandas.DataSource = listaFiltrada;
             ocultarColumnas();
 
+        }
+
+        private void cbCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cbCampo.SelectedItem.ToString();
+
+            if (opcion == "Canciones")
+            {
+                cbCriterio.Items.Clear();
+                cbCriterio.Items.Add("Mayor a");
+                cbCriterio.Items.Add("Menor a");
+                cbCriterio.Items.Add("Igual a");
+            } else
+            {
+                cbCriterio.Items.Clear();
+                cbCriterio.Items.Add("Comienza con");
+                cbCriterio.Items.Add("Termina con");
+                cbCriterio.Items.Add("Contiene");
+
+            }
+        }
+
+        private void btnBuscarAvanzado_Click(object sender, EventArgs e)
+        {
+            BandaMusicalSERVICE service = new BandaMusicalSERVICE();
+            try
+            {
+                string campo = cbCampo.SelectedItem.ToString();
+                string criterio = cbCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+
+                dgvBandas.DataSource =service.filtrar(campo,criterio,filtro);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

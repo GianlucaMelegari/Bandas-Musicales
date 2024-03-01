@@ -15,7 +15,7 @@ namespace Service
 
         public List<BandaMusical> listar()
         {
-            List<BandaMusical>lista=new List<BandaMusical>();
+            List<BandaMusical> lista = new List<BandaMusical>();
             AccesoDatos datos = new AccesoDatos();
 
             SqlConnection conexion = new SqlConnection();
@@ -25,7 +25,7 @@ namespace Service
             try
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=DISCOS_DB; integrated security=true";
-                comando.CommandType=System.Data.CommandType.Text;
+                comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion Genero, T.Descripcion Formato, D.IdEstilo,D.IdTipoEdicion, D.Id from DISCOS D, ESTILOS E, TIPOSEDICION T where D.IdEstilo=E.Id AND D.IdTipoEdicion=T.Id";
                 comando.Connection = conexion;
 
@@ -40,7 +40,7 @@ namespace Service
                     aux.Titulo = (string)lector["Titulo"];
                     aux.Fecha = (DateTime)lector["FechaLanzamiento"];
                     aux.CantCanciones = (int)lector["CantidadCanciones"];
- 
+
                     if (!(lector["UrlImagenTapa"] is DBNull))
                         aux.UrlImagenTapa = (string)lector["UrlImagenTapa"];
 
@@ -51,8 +51,8 @@ namespace Service
                     aux.Formato = new TiposEdicion();
                     aux.Formato.Id = (int)lector["IdTipoEdicion"];
                     aux.Formato.Descripcion = (string)lector["Formato"];
-                    
-                    lista.Add(aux);  
+
+                    lista.Add(aux);
 
                 }
                 conexion.Close();
@@ -82,7 +82,7 @@ namespace Service
                 datos.setearParametro("@IdTipoEdicion", nuevo.Formato.Id);
 
                 datos.ejecutarAccion();
-                
+
             }
             catch (Exception ex)
             {
@@ -105,7 +105,7 @@ namespace Service
                 datos.setearParametro("@titulo", banda.Titulo);
                 datos.setearParametro("@fecha", banda.Fecha);
                 datos.setearParametro("@cantcanc", banda.CantCanciones);
-                datos.setearParametro ("@urlImagen", banda.UrlImagenTapa);
+                datos.setearParametro("@urlImagen", banda.UrlImagenTapa);
                 datos.setearParametro("@idEstilo", banda.Genero.Id);
                 datos.setearParametro("@idTipoEdicion", banda.Formato.Id);
                 datos.setearParametro("@id", banda.Id);
@@ -116,9 +116,9 @@ namespace Service
             {
 
                 throw ex;
-            } 
-            finally 
-            { 
+            }
+            finally
+            {
                 datos.cerrarConexion();
             }
         }
@@ -139,6 +139,92 @@ namespace Service
             }
         }
 
-    }
+        public List<BandaMusical> filtrar(string campo, string criterio, string filtro)
+        {
+            List<BandaMusical> lista = new List<BandaMusical>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion Genero, T.Descripcion Formato, D.IdEstilo,D.IdTipoEdicion, D.Id from DISCOS D, ESTILOS E, TIPOSEDICION T where D.IdEstilo=E.Id AND D.IdTipoEdicion=T.Id AND  ";
+                if (campo == "CantidadCanciones")
+                {
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            consulta += "CantidadCanciones > " + filtro;
+                            break;
+                        case "Menor a":
+                            consulta += "CantidadCanciones < " + filtro;
+                            break;
+                        default:
+                            consulta += "CantidadCanciones = " + filtro;
+                            break;
+                    }
+                }
+                else if (campo == "Genero")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "E.Descripcion like '" + filtro + "%' ";
+                            break;
+                        case "Termina con":
+                            consulta += "E.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "E.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "T.Descripcion like '" + filtro + "%' ";
+                            break;
+                        case "Termina con":
+                            consulta += "T.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "T.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    BandaMusical aux = new BandaMusical();
 
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Titulo = (string)datos.Lector["Titulo"];
+                    aux.Fecha = (DateTime)datos.Lector["FechaLanzamiento"];
+                    aux.CantCanciones = (int)datos.Lector["CantidadCanciones"];
+
+                    if (!(datos.Lector["UrlImagenTapa"] is DBNull))
+                        aux.UrlImagenTapa = (string)datos.Lector["UrlImagenTapa"];
+
+                    //si no le creamos el objeto Genero / Formato nos da referencia nula ya que no existiria ningun objeto cargado
+                    aux.Genero = new Estilo();
+                    aux.Genero.Id = (int)datos.Lector["IdEstilo"];
+                    aux.Genero.Descripcion = (string)datos.Lector["Genero"];
+                    aux.Formato = new TiposEdicion();
+                    aux.Formato.Id = (int)datos.Lector["IdTipoEdicion"];
+                    aux.Formato.Descripcion = (string)datos.Lector["Formato"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+    }
 }
+
+

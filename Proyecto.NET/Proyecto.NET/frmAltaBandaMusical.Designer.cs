@@ -43,6 +43,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtUrlImagen = new System.Windows.Forms.TextBox();
             this.pbAlbum = new System.Windows.Forms.PictureBox();
+            this.btnAgregarImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbAlbum)).BeginInit();
             this.SuspendLayout();
             // 
@@ -141,7 +142,6 @@
             this.cbEstilo.Name = "cbEstilo";
             this.cbEstilo.Size = new System.Drawing.Size(134, 21);
             this.cbEstilo.TabIndex = 3;
-            //this.cbEstilo.SelectedIndexChanged += new System.EventHandler(this.cbEstilo_SelectedIndexChanged);
             // 
             // cbTipoEdicion
             // 
@@ -166,23 +166,33 @@
             this.txtUrlImagen.Name = "txtUrlImagen";
             this.txtUrlImagen.Size = new System.Drawing.Size(134, 20);
             this.txtUrlImagen.TabIndex = 5;
-            //this.txtUrlImagen.TextChanged += new System.EventHandler(this.txtUrlImagen_TextChanged);
             this.txtUrlImagen.Leave += new System.EventHandler(this.txtUrlImagen_Leave);
             // 
             // pbAlbum
             // 
-            this.pbAlbum.Location = new System.Drawing.Point(278, 22);
+            this.pbAlbum.Location = new System.Drawing.Point(291, 22);
             this.pbAlbum.Name = "pbAlbum";
             this.pbAlbum.Size = new System.Drawing.Size(194, 177);
             this.pbAlbum.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbAlbum.TabIndex = 16;
             this.pbAlbum.TabStop = false;
             // 
+            // btnAgregarImagen
+            // 
+            this.btnAgregarImagen.Location = new System.Drawing.Point(161, 180);
+            this.btnAgregarImagen.Name = "btnAgregarImagen";
+            this.btnAgregarImagen.Size = new System.Drawing.Size(90, 19);
+            this.btnAgregarImagen.TabIndex = 17;
+            this.btnAgregarImagen.Text = "+";
+            this.btnAgregarImagen.UseVisualStyleBackColor = true;
+            this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
+            // 
             // frmAltaBandaMusical
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 260);
+            this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.pbAlbum);
             this.Controls.Add(this.txtUrlImagen);
             this.Controls.Add(this.label6);
@@ -224,5 +234,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtUrlImagen;
         private System.Windows.Forms.PictureBox pbAlbum;
+        private System.Windows.Forms.Button btnAgregarImagen;
     }
 }

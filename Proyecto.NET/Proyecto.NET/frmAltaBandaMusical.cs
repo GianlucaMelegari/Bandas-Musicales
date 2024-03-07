@@ -10,12 +10,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Service;
 using System.Globalization;
+using System.IO;
+using System.Configuration;
 
 namespace Proyecto.NET
 {
     public partial class frmAltaBandaMusical : Form
     {
         private BandaMusical bandaMusical = null;
+        private OpenFileDialog archivo = null;
         public frmAltaBandaMusical()
         {
             InitializeComponent();
@@ -74,7 +77,11 @@ namespace Proyecto.NET
                     MessageBox.Show("Agregado exitosamente.");
 
                 }
-
+                // Guardo img si la levanto localmente
+                if(archivo!=null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
+                { 
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"]+ archivo.SafeFileName);
+                }
 
                 Close();
                 
@@ -140,9 +147,21 @@ namespace Proyecto.NET
             }
         }
 
-        //private void txtUrlImagen_TextChanged(object sender, EventArgs e)
-        //{
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg;|png|*.png";
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                txtUrlImagen.Text = archivo.FileName;
+                cargarImagen(archivo.FileName);
 
-        //}
+                //guardo img
+                //File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"]+ archivo.SafeFileName);
+                
+            }
+        }
+
+        
     }
 }
